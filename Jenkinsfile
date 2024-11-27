@@ -2,21 +2,29 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/PavanCeaser/jen_pipeline.git'
+            }
+        }
+
         stage('Build') {
             steps {
-                
                 sh 'python3 -m venv venv'
-                sh 'bash -c "source venv/bin/activate && pip install -r requirements.txt"'
+                sh 'source venv/bin/activate && pip install -r requirements.txt'
             }
         }
+
         stage('Test') {
             steps {
-                sh 'python -m unittest tests/test_main.py'
+                sh 'source venv/bin/activate && python -m unittest tests/test_main.py'
             }
         }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying to production...'
+                // Add your deployment steps here, e.g., using scripts or plugins
+                sh 'echo "Deploying to production..."'
             }
         }
     }
