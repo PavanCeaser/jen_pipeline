@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'your-credentials-id',
+                    
                     url: 'https://github.com/PavanCeaser/jen_pipeline.git'
             }
         }
